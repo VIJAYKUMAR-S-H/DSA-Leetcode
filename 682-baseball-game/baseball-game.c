@@ -1,38 +1,39 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int calPoints(char **ops, int opsSize) {
+int calPoints(char** operations, int operationsSize) {
 
     int stack[1000];
     int top = -1;
 
-    for(int i = 0; i < opsSize; i++) {
+    for(int i = 0; i < operationsSize; i++) {
 
-        if(strcmp(ops[i], "C") == 0) {
-            top--;   // remove last score
+        // Cancel previous score
+        if(strcmp(operations[i], "C") == 0) {
+            top--;
         }
 
-        else if(strcmp(ops[i], "D") == 0) {
+        // Double previous score
+        else if(strcmp(operations[i], "D") == 0) {
             stack[++top] = 2 * stack[top];
         }
 
-        else if(strcmp(ops[i], "+") == 0) {
-            int sum = stack[top] + stack[top-1];
-            stack[++top] = sum;
+        // Sum of last two scores
+        else if(strcmp(operations[i], "+") == 0) {
+            stack[++top] = stack[top] + stack[top-1];
         }
 
+        // Integer value
         else {
-            int val = atoi(ops[i]); // convert string to integer
-            stack[++top] = val;
+            stack[++top] = atoi(operations[i]);
         }
     }
 
-    int total = 0;
-
+    // calculate total sum
+    int sum = 0;
     for(int i = 0; i <= top; i++) {
-        total += stack[i];
+        sum += stack[i];
     }
 
-    return total;
+    return sum;
 }
