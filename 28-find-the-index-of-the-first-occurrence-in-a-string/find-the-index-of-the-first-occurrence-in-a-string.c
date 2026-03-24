@@ -1,0 +1,24 @@
+int strStr(char *haystack, char *needle) {
+    int i, j;
+    
+    // If needle is empty, return 0
+    if (needle[0] == '\0')
+        return 0;
+
+    for (i = 0; haystack[i] != '\0'; i++) {
+        j = 0;
+
+        // Compare substring
+        while (haystack[i + j] != '\0' && needle[j] != '\0' &&
+               haystack[i + j] == needle[j]) {
+            j++;
+        }
+
+        // If we reached end of needle → match found
+        if (needle[j] == '\0') {
+            return i;
+        }
+    }
+
+    return -1;
+}
