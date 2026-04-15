@@ -1,7 +1,12 @@
-class Solution:
-    def missingNumber(self, nums: List[int]) -> int:
-        res = len(nums)
-
-        for i in range(len(nums)):
-            res += (i - nums[i])
-        return res
+class Solution(object):
+    def missingNumber(self, nums):
+        n=len(nums)
+        expected=n*(n+1)/2
+        actual=sum(nums)
+        return expected-actual
+         
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        
